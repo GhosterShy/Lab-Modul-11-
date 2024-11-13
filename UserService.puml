@@ -1,0 +1,19 @@
+@startuml
+
+package "Order Management System" {
+
+    [UserService] -down-|> IUserService : Implements
+    [ProductService] -down-|> IProductService : Implements
+    [OrderService] -down-|> IOrderService : Implements
+    [PaymentService] -down-|> IPaymentService : Implements
+    [NotificationService] -down-|> INotificationService : Implements
+
+    [OrderService] --> [ProductService] : uses
+    [OrderService] --> [PaymentService] : uses
+    [OrderService] --> [NotificationService] : uses
+    [PaymentService] --> [NotificationService] : notifies
+
+
+}
+
+@enduml

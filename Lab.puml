@@ -1,0 +1,47 @@
+@startuml
+' Class diagram for Library Management System
+
+class Book {
+    - string Title
+    - string Author
+    - string ISBN
+    - bool IsAvailable
+    --
+    + MarkAsLoaned(): void
+    + MarkAsAvailable(): void
+}
+
+class Reader {
+    - int Id
+    - string Name
+    - string Email
+    --
+    + BorrowBook(book: Book): boolean
+    + ReturnBook(book: Book): void
+}
+
+class Librarian {
+    - int Id
+    - string Name
+    - string Position
+    --
+    + AddBook(book: Book): void
+    + RemoveBook(book: Book): void
+    + GenerateReport(): void
+}
+
+class Loan {
+    - Book Book
+    - Reader Reader
+    - Date LoanDate
+    - Date ReturnDate
+    --
+    + IssueLoan(book: Book, reader: Reader): bool
+    + CompleteLoan(): void
+}
+
+Reader "0..*" -- "1" Loan : borrows >
+Book "0..*" -- "1" Loan : loaned by >
+Librarian "1" -- "0..*" Loan : manages >
+
+@enduml
